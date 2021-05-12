@@ -44,15 +44,18 @@ for o in mice_obese["Weight"]:
             for mouse in mice.iterrows():
                 if mouse[1]["Weight"]<=margin and mouse[1]["Obese"]=="no":
                     acc+=1
+                    if abs(mouse[1]["Weight"] - margin) < abs(n - o) / 2:
+                        sv += 1
                 elif mouse[1]["Weight"]>=margin and mouse[1]["Obese"]=="yes":
                     acc+=1
+                    if abs(mouse[1]["Weight"] - margin) < abs(n - o) / 2:
+                        sv += 1
 
-                if abs(mouse[1]["Weight"]-margin)<abs(n-o)/2:
-                    sv+=1
 
-            temp=pd.DataFrame({"Margin":[margin],"Accuracy":[acc/len(mice)], "Support vectors":[sv]})
+            temp=pd.DataFrame({"Margin":[margin],"Accuracy":[acc/len(mice)], "Support vectors":[sv+2]})
 
-            plt.figure(i)
+            plt.figure(1) # use i to output all classifiers
+            plt.clf()
             plt.plot([margin, margin], [-1, 1])
             plt.scatter(mice_obese["Weight"], np.zeros(len(mice_obese["Weight"])), s=200, c="r")
             plt.scatter(mice_not_obese["Weight"], np.zeros(len(mice_not_obese["Weight"])), s=200, c="g")
