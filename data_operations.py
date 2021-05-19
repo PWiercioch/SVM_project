@@ -92,7 +92,7 @@ class Data:
 
     def plot_RMS(self, data):
         # Creating figure
-        fig = plt.figure(figsize=(10, 7))
+        # fig = plt.figure(figsize=(10, 7))
         ax = plt.axes(projection="3d")
 
         for label in data["Label"].unique():
@@ -104,3 +104,15 @@ class Data:
         plt.ylabel("Y_RMS")
         ax.set_zlabel("Z_RMS")
         ax.legend(data["Label"].unique())
+
+    def plot_1D(self, data, axis):
+        for label in data["Label"].unique():
+            plot_data = data[data["Label"] == label]
+            plt.scatter(plot_data[axis], np.zeros(len(plot_data[axis])), s=300)
+            plt.legend(data["Label"].unique())
+
+    def plot_2D(self, data, x_axis, y_axis):
+        for label in data["Label"].unique():
+            plot_data = data[data["Label"] == label]
+            plt.scatter(plot_data[x_axis], plot_data[y_axis], s=300)
+            plt.legend(data["Label"].unique())
