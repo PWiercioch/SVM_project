@@ -60,11 +60,10 @@ class Data:
 
     def window(self, data, items, overlap):
         window_data_x_temp = {}
-        window_data_x_temp = {}
+        window_data_y_temp = {}
         window_data_z_temp = {}
         for dataset in data["X"]:
             n=1
-            print(data["X"][dataset])
             while n * items <= len(data["X"][dataset].index.values):
                 # make two sets of bools and then add them
                 if n > 1:
@@ -72,13 +71,21 @@ class Data:
                 else:
                     bool1 = data["X"][dataset].index.values < n * items
                 bool2 = data["X"][dataset].index.values >= (n - 1) * items - overlap
-                test = data["X"][dataset][np.logical_and(bool1, bool2)]
-                #print(test.values)
-                window_data_x_temp[dataset + "_set_" + str(n)] = test.values
+                x_temp = data["X"][dataset][np.logical_and(bool1, bool2)]
+                y_temp = data["Y"][dataset][np.logical_and(bool1, bool2)]
+                z_temp = data["Z"][dataset][np.logical_and(bool1, bool2)]
+
+                window_data_x_temp[dataset + "_set_" + str(n)] = x_temp.values
+                window_data_y_temp[dataset + "_set_" + str(n)] = y_temp.values
+                window_data_z_temp[dataset + "_set_" + str(n)] = z_temp.values
 
                 n += 1
 
-            self.window_data_x=pd.DataFrame(window_data_x_temp)
+            window_data_x = pd.DataFrame(window_data_x_temp)
+            window_data_y = pd.DataFrame(window_data_y_temp)
+            window_data_z = pd.DataFrame(window_data_z_temp)
+
+            self.window_data={"X":window_data_x, "Y":window_data_y, "Z":window_data_z}
 
     def create_time(self, data, end_time): # creates time vector with start 0, end at end_time and number of steps based on provided data
        self.raw_time = np.linspace(0, end_time, len(data[list(data.keys())[0]]["accX"]))  # gets accX data from first file (keys function requires conversion to list)
@@ -136,5 +143,5 @@ class Data:
     def plot_2D(self, data, x_axis, y_axis):
         for label in data["Label"].unique():
             plot_data = data[data["Label"] == label]
-            plt.scatter(plot_data[x_axis], plot_data[y_axis], s=300)
+            plt.scatter(plot_data[x_axis], plot_data[y_axis], s=30)
             plt.legend(data["Label"].unique())
