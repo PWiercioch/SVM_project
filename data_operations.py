@@ -131,7 +131,6 @@ class Data:
             plot_data=data[data["Label"]==label]
             ax.scatter3D(plot_data["X RMS"], plot_data["Y RMS"], plot_data["Z RMS"], s=300)
 
-        plt.title("Feature extraction")
         plt.xlabel("X_RMS")
         plt.ylabel("Y_RMS")
         ax.set_zlabel("Z_RMS")
@@ -152,13 +151,13 @@ class Data:
 def draw_1D(data):
     plt.subplot(3, 1, 1)
     data.plot_1D(data.rms_data, "X RMS")
-    plt.title("X RMS")
+    plt.xlabel("X RMS")
     plt.subplot(3, 1, 2)
     data.plot_1D(data.rms_data, "Y RMS")
-    plt.title("Y RMS")
+    plt.xlabel("Y RMS")
     plt.subplot(3, 1, 3)
     data.plot_1D(data.rms_data, "Z RMS")
-    plt.title("Z RMS")
+    plt.xlabel("Z RMS")
 
 def draw_2D(data):
     plt.subplot(3, 1, 1)
@@ -199,52 +198,66 @@ def classify_data(data, kernel, degree=2, drop_Z_rms=False):
     y_pred = svclassifier.predict(X_test)
 
     # Confusion matrix
-    print(confusion_matrix(y_test, y_pred))
     print(classification_report(y_test, y_pred))
 
     return svclassifier, X_train, X_test, y_train, y_test
 
 def plot_classifier_2D(X_data, y_data,svclassifier):
-    # Plot classifier
     x1 = np.linspace(0.4, 1.4)
-    y1 = np.linspace(0.4, 1.4)
-
-    y1 = np.array((-svclassifier.intercept_[0] - svclassifier.coef_[0][0] * x1) / svclassifier.coef_[0][
-        1])  # Zrozumiec ta funkcje
-    y2 = np.array((-svclassifier.intercept_[1] - svclassifier.coef_[1][0] * x1) / svclassifier.coef_[1][1])
-    y3 = np.array((-svclassifier.intercept_[2] - svclassifier.coef_[2][0] * x1) / svclassifier.coef_[2][1])
 
     X_data["Label"] = y_data
 
-     # dziala gdy wylaczone z rms
-    plot_data = X_data[X_data["Label"] == "110"]
-    plt.scatter(plot_data["X RMS"], plot_data["Y RMS"], s=30, c="#1f77b4")
-    plot_data = X_data[X_data["Label"] == "60_"]
-    plt.scatter(plot_data["X RMS"], plot_data["Y RMS"], s=30, c="#ff7f0e")
-    plot_data = X_data[X_data["Label"] == "OFF"]
-    plt.scatter(plot_data["X RMS"], plot_data["Y RMS"], s=30, c="#2ca02c")
-    plt.plot(x1, y1 + 0.0025, c="#ff7f0e", linewidth=3)
-    plt.plot(x1, y1 - 0.0025, c="#1f77b4", linewidth=3)
-    plt.plot(x1, y2 - 0.0045, c="#2ca02c", linewidth=3)
-    plt.plot(x1, y2 + 0.0045, c="#1f77b4", linewidth=3)
-    plt.plot(x1, y3 + 0.0025, c="#ff7f0e", linewidth=3)
-    plt.plot(x1, y3 - 0.0025, c="#2ca02c", linewidth=3)
-    plt.ylim([1.5, 2.5])
-    plt.title("Train data")
-    plt.xlabel("X RMS")
-    plt.ylabel("Y RMS")
-    plt.legend(X_data["Label"].unique())
+    if len(svclassifier.coef_)==3:
+        y1 = np.array((-svclassifier.intercept_[0] - svclassifier.coef_[0][0] * x1) / svclassifier.coef_[0][1])
+        y2 = np.array((-svclassifier.intercept_[1] - svclassifier.coef_[1][0] * x1) / svclassifier.coef_[1][1])
+        y3 = np.array((-svclassifier.intercept_[2] - svclassifier.coef_[2][0] * x1) / svclassifier.coef_[2][1])
 
-def plot_classifier_3D(data, svclassifier):
-    x1 = np.linspace(0.4, 1.4)
-    y1 = np.linspace(1.4, 2.1)
+        plot_data = X_data[X_data["Label"] == "110"]
+        plt.scatter(plot_data["X RMS"], plot_data["Y RMS"], s=30, c="#1f77b4")
+        plot_data = X_data[X_data["Label"] == "60_"]
+        plt.scatter(plot_data["X RMS"], plot_data["Y RMS"], s=30, c="#ff7f0e")
+        plot_data = X_data[X_data["Label"] == "OFF"]
+        plt.scatter(plot_data["X RMS"], plot_data["Y RMS"], s=30, c="#2ca02c")
+        plt.plot(x1, y1 + 0.0025, c="#ff7f0e", linewidth=3)
+        plt.plot(x1, y1 - 0.0025, c="#1f77b4", linewidth=3)
+        plt.plot(x1, y2 - 0.0045, c="#2ca02c", linewidth=3)
+        plt.plot(x1, y2 + 0.0045, c="#1f77b4", linewidth=3)
+        plt.plot(x1, y3 + 0.0025, c="#ff7f0e", linewidth=3)
+        plt.plot(x1, y3 - 0.0025, c="#2ca02c", linewidth=3)
+        plt.ylim([1.5, 2.5])
+        plt.title("Train data")
+        plt.xlabel("X RMS")
+        plt.ylabel("Y RMS")
+        plt.legend(X_data["Label"].unique())
+    elif len(svclassifier.coef_)==1:
+        y1 = np.array((-svclassifier.intercept_[0] - svclassifier.coef_[0][0] * x1) / svclassifier.coef_[0][1])
+
+        plot_data = X_data[X_data["Label"] == "110"]
+        plt.scatter(plot_data["X RMS"], plot_data["Y RMS"], s=30, c="#1f77b4")
+        plot_data = X_data[X_data["Label"] == "60_"]
+        plt.scatter(plot_data["X RMS"], plot_data["Y RMS"], s=30, c="#ff7f0e")
+        plot_data = X_data[X_data["Label"] == "OFF"]
+        plt.scatter(plot_data["X RMS"], plot_data["Y RMS"], s=30, c="#2ca02c")
+        plt.plot(x1, y1 + 0.0025, c="#ff7f0e", linewidth=3)
+        plt.plot(x1, y1 - 0.0025, c="#1f77b4", linewidth=3)
+        plt.ylim([1.5, 2.5])
+        plt.title("Train data")
+        plt.xlabel("X RMS")
+        plt.ylabel("Y RMS")
+        plt.legend(X_data["Label"].unique())
+
+def plot_classifier_3D(X_data, y_data, svclassifier,fig):
+    X_data["Label"] = y_data
+
+    x1 = np.linspace(0.4, 1.2)
+    y1 = np.linspace(1.6, 2.1)
     x2, y2 = np.meshgrid(x1, y1)
     z = lambda x1, y1: ((-svclassifier.intercept_[0] - svclassifier.coef_[0][0] * x1 - svclassifier.coef_[0][1] * y1) /
                         svclassifier.coef_[0][2])
 
     ax = fig.add_subplot(111, projection='3d')
-    for label in data["Label"].unique():
-        plot_data = data[data["Label"] == label]
+    for label in X_data["Label"].unique():
+        plot_data = X_data[X_data["Label"] == label]
         ax.scatter3D(plot_data["X RMS"], plot_data["Y RMS"], plot_data["Z RMS"], s=50)
     ax.plot_surface(x2, y2, z(x2, y2), color="k", shade=0.5)
     plt.xlabel("X_RMS")
