@@ -24,9 +24,9 @@ As a device capturing data smartphone accelerometer was used. Data was captured 
 Collected overall of 39 (13 for each type of movement) samples of 10 seconds movement.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/83305684/119744193-c6cd3180-be8b-11eb-8046-d695dc9260b5.png" width="300"/>
-  <img src="https://user-images.githubusercontent.com/83305684/119744220-d3518a00-be8b-11eb-9b7e-974d242e1a40.png" width="300"/> 
-  <img src="https://user-images.githubusercontent.com/83305684/119744058-7c4bb500-be8b-11eb-996a-1c59f60d5aab.png" width="300"/>
+  <img src="https://user-images.githubusercontent.com/83305684/119744193-c6cd3180-be8b-11eb-8046-d695dc9260b5.png" width="250"/>
+  <img src="https://user-images.githubusercontent.com/83305684/119744220-d3518a00-be8b-11eb-9b7e-974d242e1a40.png" width="250"/> 
+  <img src="https://user-images.githubusercontent.com/83305684/119744058-7c4bb500-be8b-11eb-996a-1c59f60d5aab.png" width="250"/>
 </p>
 <p align="center">
   <em>Sample data</em>
@@ -77,3 +77,33 @@ Instead of recordnig new data, moving split window was used. Each of 10 second d
 <p align="center">
   <em>Increased ammount of data</em>
 </p>
+
+Impact of 3 dimensions (X RMS, Y RMS, Z RMS) on classifier was also studied for classification beetwen 2 labels.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83305684/120043361-18042f00-c00c-11eb-86b1-3bb52fbff2af.png" width="500"/>
+</p>
+<p align="center">
+  <em>Three dimensional classifier</em>
+</p>
+
+Classifier accuracy is printed in the terminal.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83305684/120046666-f8bcd000-c012-11eb-891e-4a7297b817c0.png" width="350"/>
+  <img src="https://user-images.githubusercontent.com/83305684/120046683-feb2b100-c012-11eb-9271-61656a3606b5.png" width="300"/> 
+</p>
+<p align="center">
+  <em>2D Classifier accuracy</em>
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83305684/120046683-feb2b100-c012-11eb-9271-61656a3606b5.png" width="350"/> 
+</p>
+<p align="center">
+  <em>3D Classifier accuracy</em>
+</p
+
+
+## Motion detection
+
