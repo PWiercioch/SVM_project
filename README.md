@@ -3,6 +3,12 @@ University project.
 
 The purpose of this project is motion detection based on accelerometer data. As a classifiacation algorithm support vetor machine was used. It is a extension to first version of the proejct in which classification was made using neural network in Edge Impulse: https://www.edgeimpulse.com/.
 
+## Table of contents
+- [Collected data description](#collected-data-description)
+- [Feature extraction](#feature-extraction)
+- [Initial analysis](#initial-analysis)
+- [3 labels](#3-labels)
+
 ## Collected data description
 
 Bicycle trainer allows to ride a real bike indoors. It allows to set an ammount of power into excercise. 
@@ -91,7 +97,6 @@ Classifier accuracy is printed in the terminal.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/83305684/120046666-f8bcd000-c012-11eb-891e-4a7297b817c0.png" width="350"/>
-  <img src="https://user-images.githubusercontent.com/83305684/120046683-feb2b100-c012-11eb-9271-61656a3606b5.png" width="300"/> 
 </p>
 <p align="center">
   <em>2D Classifier accuracy</em>
@@ -102,8 +107,39 @@ Classifier accuracy is printed in the terminal.
 </p>
 <p align="center">
   <em>3D Classifier accuracy</em>
-</p
+</p>
 
+## 3 labels
 
-## Motion detection
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83305684/120047306-8c42d080-c014-11eb-870a-5093868e2306.png" width="300"/>
+</p>
+<p align="center">
+  <em>Data consisting of 3 labels</em>
+</p>
 
+Firstly 2 dimensional classifier was used.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83305684/120047431-e3e13c00-c014-11eb-8423-47081ad4829c.png" width="450"/>
+  <img src="https://user-images.githubusercontent.com/83305684/120047537-1ab75200-c015-11eb-9cb6-4663f67a1a95.png" width="450"/> 
+</p>
+<p align="center">
+  <em>2D classifier</em>
+</p>
+
+Compared to case with only 2 labels. Classifier performed better in 3 dimensional data.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83305684/120047693-78e43500-c015-11eb-8a0a-92f287356f57.png" width="350"/>
+</p>
+<p align="center">
+  <em>2D Classifier accuracy</em>
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83305684/120047701-7da8e900-c015-11eb-9e1b-4bfde705653a.png" width="350"/> 
+</p>
+<p align="center">
+  <em>3D Classifier accuracy</em>
+</p>
