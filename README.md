@@ -1,24 +1,25 @@
 # SVM Project
 University project. 
 
-The purpose of this project is motion detection based on accelerometer data. As a classifiacation algorithm support vetor machine was used. It is a extension to first version of the proejct in which classification was made using neural network in Edge Impulse: https://www.edgeimpulse.com/.
+The purpose of this project is motion detection based on accelerometer data. As a classification algorithm support vector machine was used. It is a extension to first version of the proeject in which classification was made using neural network in Edge Impulse: https://www.edgeimpulse.com/.
 
 ## Table of contents
 - [Collected data description](#collected-data-description)
 - [Feature extraction](#feature-extraction)
 - [Initial analysis](#initial-analysis)
 - [3 labels](#3-labels)
+- [Comparison with Edge Impulse](#comparison-with-edge-impulse)
 
 ## Collected data description
 
-Bicycle trainer allows to ride a real bike indoors. It allows to set an ammount of power into excercise. 
+Bicycle trainer allows to ride a real bike indoors. It allows to set an amount of power into exercise. 
 
-Motion detection is carried out by analyzing bike frame vibration.
+Motion detection is carried out by analysing bike frame vibration.
 3 types of movement were selected:
 * pedalling with output power of 60 Watts
 * pedalling with output power of 110 Watts
 * standing still 
-As a device capturing data smartphone accelerometer was used. Data was captured in Edge Impulse and exportet into .json files.
+As a device capturing data smartphone accelerometer was used. Data was captured in Edge Impulse and exported into .json files.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/83305684/119743198-a308ec00-be89-11eb-8691-9c962fb85361.png" width="600"/>
@@ -51,9 +52,9 @@ For each sample RMS (Root Mean Square) was calculated.
 ## Initial analysis
 Data analysis started with visual assessment.
 
-At first to simplify the task, only 2 types of movement were analyzed: 60 Watts and 110 Watts.
+At first to simplify the task, only 2 types of movement were analysed: 60 Watts and 110 Watts.
 
-Plots in fever dimensions were drawn to check which of the features allowed to visualy seperate data.
+Plots in fever dimensions were drawn to check which of the features allowed to visually separate data.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/83305684/119747650-722db480-be93-11eb-9f96-e90b6caff2ab.png" width="400"/>
@@ -75,7 +76,7 @@ First attempt in building motion recognition system was to classify data for onl
 
 Ideal accuracy was alarming. In order to ensure the correctness of the classifier more data needed to be fed into the model. 
 
-Instead of recordnig new data, moving split window was used. Each of 10 second data samples was broken into 1 second long periods.
+Instead of recording new data, moving split window was used. Each of 10 second data samples was broken into 1 second long periods.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/83305684/119748228-b7061b00-be94-11eb-8c28-3b2b06d3001f.png" width="500"/>
@@ -84,7 +85,7 @@ Instead of recordnig new data, moving split window was used. Each of 10 second d
   <em>Increased ammount of data</em>
 </p>
 
-Impact of 3 dimensions (X RMS, Y RMS, Z RMS) on classifier was also studied for classification beetwen 2 labels.
+Impact of 3 dimensions (X RMS, Y RMS, Z RMS) on classifier was also studied for classification between 2 labels.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/83305684/120043361-18042f00-c00c-11eb-86b1-3bb52fbff2af.png" width="500"/>
@@ -143,3 +144,22 @@ Compared to case with only 2 labels. Classifier performed better in 3 dimensiona
 <p align="center">
   <em>3D Classifier accuracy</em>
 </p>
+
+## Comparison with Edge Impulse
+Same data was used to create a classifier with neural network using Edge Impulse.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83305684/120537322-71da6f80-c3e5-11eb-9cca-d0fa264fade4.png" width="450"/> 
+</p>
+<p align="center">
+  <em>Neural network setup</em>
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83305684/120537453-9e8e8700-c3e5-11eb-9dd7-a16df58f5478.png" width="450"/> 
+</p>
+<p align="center">
+  <em>Neural network accuracy</em>
+</p>
+
+In this case support vector machine classifier performed better than the neural network classifier. 
